@@ -4,4 +4,40 @@
 import sys
 import argparse
 
-def write_result()
+def largest_prime_divisor(n, collect=False):
+    """
+    Return the largest prime divisor of n.
+
+    If collect=True, also return the list of prime factors.
+    """
+    if n < 2:
+        raise ValueError("n must be >= 2")
+    
+    factors = [] if collect else None
+    current = n
+    last = None
+
+    # Factor 2 separately
+    while current % 2 == 0:
+        last = 2
+        if factors is not None:
+            factors.append(2)
+        current //= 2
+
+    # Odd factors
+    i = 3
+    while i * i <= current:
+        while current % i == 0:
+            last = i
+            if factors is not None:
+                factors.append(i)
+            current //= i
+        i += 2
+
+    # Remaining prime
+    if current > 1:
+        last = current
+        if factors is not None:
+            factors.append(current)
+
+    return factors, last
