@@ -3,7 +3,7 @@ import sys
 from .commands import handle_list, handle_info, handle_solve
 from .errors import JSONNotFoundError, ChallengeNotFoundError, ChallengeNotInListError
 from .display import print_error
-from .loader import load_build_parser, get_challenge_readme
+from .loader import load_build_parser
 
 def build_parser():# -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -54,15 +54,9 @@ def main():
                     print_error("Vous devez spécifier un numéro de challenge.")
                     return
             
-            # Création d'un parser temporaire pour le challenge n
-            temp_parser = argparse.ArgumentParser(
-                description=get_challenge_readme(n), 
-                formatter_class=argparse.RawTextHelpFormatter
-            )
                 
             challenge_build_parser = load_build_parser(n)
-            if challenge_build_parser:
-                challenge_build_parser(temp_parser)
+            temp_parser = challenge_build_parser()
 
             if args.help : 
                 temp_parser.print_help()
