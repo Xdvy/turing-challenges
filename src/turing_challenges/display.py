@@ -45,6 +45,10 @@ def print_result(result):
         print(f"Résultat : {result}")
 
 
+def print_time(time):
+    print(f"Temps d'exécution : {round(time,3)}s")
+
+
 def print_error(msg: str):
     """Affiche un message d'erreur"""
     if RICH_AVAILABLE:

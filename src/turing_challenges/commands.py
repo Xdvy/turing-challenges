@@ -3,6 +3,7 @@ from . import display
 from .discovery import discover_challenges
 from .registry import get_challenge_title, get_challenge_states
 from .loader import get_challenge_readme
+import time
 
 
 def handle_list():
@@ -32,5 +33,10 @@ def handle_solve(n: int, **kwargs):
             f"Le challenge {n} ({title}) n'est pas encore résolu."
         )
         return
+    
+    start_time = time.time()
     result = runner.solve(n, **kwargs)
+    end_time = time.time()
+
     display.print_result(result)
+    display.print_time(end_time-start_time)
