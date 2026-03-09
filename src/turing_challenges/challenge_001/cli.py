@@ -8,13 +8,15 @@ def build_parser():
 
     return parser
 
-def main():
-    parser = build_parser()
-    args = parser.parse_args()
-
-    # appel direct à la logique
+def run(max_value: int) -> int:
     from .challenge import Challenge001
-    result = Challenge001().solve(args.max_value)
+    return Challenge001().solve(max_value)
+
+def main(argv=None, runner=run):
+    parser = build_parser()
+    args = parser.parse_args(argv)
+
+    result = runner(args.max_value)
     print(result)
 
 
